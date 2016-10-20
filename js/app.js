@@ -59,10 +59,6 @@ $('#equals').on('click', function(){
   leftInteger = (parseInt(holder));
   rightInteger = (parseInt(rightHolder));
   //turn left&right numbers into into integers
-  opNum = false
-  holder = '';
-  rightHolder = '';
-  //resets variable and goes back to left side
   console.log('left = ' + leftInteger);
   console.log('right = ' + rightInteger);
   console.log(oper);
@@ -86,6 +82,14 @@ $('#equals').on('click', function(){
     default:
       answer = 'Error';
   }
+  // opNum = false
+  // holder = '';
+  // resets right number and goes back to left side, equals == clear **commented out**
+
+  oper = '';
+  rightHolder = '';
+  holder = answer;
+  //resets operator and right number, answer will be stored as left # for further manipulation
 
   console.log('answer = ' + answer);
   if(answer%1===0){
@@ -96,7 +100,6 @@ $('#equals').on('click', function(){
     //if answer is decimal, show only up to 4 decimal places
     $('#screen').text(parseFloat(answer.toFixed(4)));
   }
-
 
 
 })
