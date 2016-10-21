@@ -7,6 +7,7 @@ var rightHolder = '';
 var oper = '';
 var opNum = false;
 var answer = 0;
+
 $('span').not('.operator').on('click', function(){
   //select number buttons
   if(!opNum){
@@ -26,7 +27,7 @@ $('span').not('.operator').on('click', function(){
 
 $('.operator').not('#equals').not('#clear').on('click', function(){
   //select math operator button
-  if(holder===''){
+  if(holder==='' && ($(this).text())==='-'){
     holder = '-';
     $('#screen').text(holder);
   }
@@ -57,8 +58,8 @@ $('#clear').on('click', function(){
 })
 
 $('#equals').on('click', function(){
-  leftInteger = (parseFloat(holder, 10));
-  rightInteger = (parseFloat(rightHolder, 10));
+  leftInteger = (parseFloat(holder));
+  rightInteger = (parseFloat(rightHolder));
   //turn left&right numbers into into integers
                     // console.log('left = ' + leftInteger);
                     // console.log('right = ' + rightInteger);
@@ -83,26 +84,28 @@ $('#equals').on('click', function(){
     default:
       answer = 'Error';
   }
-  // opNum = false
-  // holder = '';
-  // resets right number and goes back to left side, equals == clear **commented out**
 
-  //resets operator and right number, answer will be stored as left # for further manipulation
+  if(answer===(Infinity)||answer===(-Infinity)){
+    $('#screen').text('ERROR');
 
-                // console.log('answer = ' + answer);
-  if(answer%1===0){
+  }
+  else if(answer%1===0){
     //if answer is a whole number, show no decimal places
-    $('#screen').text(parseFloat(answer));
+    var answerOne = parseFloat(answer);
+    $('#screen').text(answerOne);
+    holder = answerOne;
   }
   else{
     //if answer is decimal, show only up to 4 decimal places
-    $('#screen').text(parseFloat(answer.toFixed(4)));
+    var answerTwo = parseFloat(answer.toFixed(4));
+    $('#screen').text(answerTwo);
+    holder = answerTwo;
   }
   oper = '';
   rightHolder = '';
-  holder = answer;
   opNum = false;
   console.log(holder);
+  //resets operator, opNum & right number, answer will be stored as left # for further manipulation, after = but before an operator numbers will concat on left number
 
 })
 
